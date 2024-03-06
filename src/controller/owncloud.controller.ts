@@ -4,15 +4,21 @@ import {
   Controller,
   UploadedFile,
   UseInterceptors,
+  Get,
+  Param,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { DocumentUploadService } from './document.service';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { DocumentUploadService } from '../service/document/create/documentUpload.service';
+import { DocumentGetFileService } from '../service/document/getFile/documentGetFile.service';
 
 @ApiTags('files')
 @Controller()
 export class FileController {
-  constructor(private readonly documentUpload: DocumentUploadService) {}
+  constructor(
+    private readonly _documentUpload: DocumentUploadService,
+    private readonly _documentGetFileService: DocumentGetFileService,
+  ) {}
 
   /**
    * Upload file
@@ -41,6 +47,11 @@ export class FileController {
     file: any,
     @Body('key') key: string,
   ): Promise<string> {
-    return await this.documentUpload.upload(file?.buffer, key);
+    return await this._documentUpload.upload(file?.buffer, key);
+  }
+
+  @Get('getFile/:key')
+  async getFile(@Param('key') key: string): Promise<any> {
+    return await this._documentGetFileService.getFile(key);
   }
 }
