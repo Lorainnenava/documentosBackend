@@ -1,13 +1,14 @@
 "use client";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { DocumentUploadReducer } from "./feauture/documents/slice";
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
+import { DocumentUploadReducer } from "./feauture/documents/create/slice";
+import { DocumentGetFileReducer } from "./feauture/documents/getFile/slice";
 
 /**
  * Configuración del store
  */
 export const userStore = configureStore({
-    reducer: { root: DocumentUploadReducer },
+    reducer: { root: DocumentUploadReducer, getFile: DocumentGetFileReducer },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: false,

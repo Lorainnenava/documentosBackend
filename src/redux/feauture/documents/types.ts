@@ -2,5 +2,9 @@ export interface DocumentState {
     loading: boolean;
     error: string | undefined;
     success: boolean | null;
-    data: any;
+    data: {
+        status: number;
+        statusText: string;
+        data?: string;
+    };
 }

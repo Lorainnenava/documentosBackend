@@ -2,7 +2,7 @@
 
 import { documentUpload } from "./request";
 import { createSlice } from "@reduxjs/toolkit";
-import { initialStateDocument } from "./initialState";
+import { initialStateDocument } from "../initialState";
 
 /**
  * DocumentUploadSlice

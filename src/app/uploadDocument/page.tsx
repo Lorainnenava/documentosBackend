@@ -10,10 +10,10 @@ import React, {
 import { toast } from "react-toastify";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import { Button, Grid, Typography } from "@mui/material";
-import { base64ToArrayBuffer, toBase64 } from "../helper";
+import { base64ToArrayBuffer, toBase64 } from "../../helper";
 import { AddDocument, Form, SpanDocument } from "./styled";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { documentUpload } from "../../redux/feauture/documents/request";
+import { documentUpload } from "../../redux/feauture/documents/create/request";
 
 const index = () => {
     const dispatch = useAppDispatch();
@@ -67,7 +67,7 @@ const index = () => {
      */
     useEffect(() => {
         if (documentosSelector.success === true) {
-            toast(documentosSelector.data, {
+            toast(documentosSelector.data.statusText, {
                 autoClose: 2000,
                 type: "success",
                 hideProgressBar: false,
