@@ -1,11 +1,11 @@
 import { APP_PIPE } from '@nestjs/core';
-import { AppService } from './app.service';
+import { Helper } from './helper/adapter';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
 import { Module, ValidationPipe } from '@nestjs/common';
-import { FileController } from './document/owncloud.controller';
-import { DocumentUploadService } from './document/document.service';
-import { CarpetaAndSubCarpetaService } from './document/carpeta.service';
+import { FileController } from './controller/owncloud.controller';
+import { DocumentUploadService } from './service/document/create/documentUpload.service';
+import { DocumentGetFileService } from './service/document/getFile/documentGetFile.service';
+import { FolderAndSubFoldersService } from './service/document/folderAndSobFolder/folderAndSubFolder.service';
 
 @Module({
   imports: [
@@ -14,11 +14,12 @@ import { CarpetaAndSubCarpetaService } from './document/carpeta.service';
       envFilePath: '.env',
     }),
   ],
-  controllers: [AppController, FileController],
+  controllers: [FileController],
   providers: [
-    AppService,
-    CarpetaAndSubCarpetaService,
+    Helper,
+    FolderAndSubFoldersService,
     DocumentUploadService,
+    DocumentGetFileService,
     {
       provide: APP_PIPE,
       useClass: ValidationPipe,
