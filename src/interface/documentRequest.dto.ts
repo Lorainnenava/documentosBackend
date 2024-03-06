@@ -1,7 +1,8 @@
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
 
 export class DocumentRequestDto {
   @IsNotEmpty()
+  @IsOptional()
   Body?: Buffer | ArrayBuffer;
 
   @IsNotEmpty()
@@ -10,5 +11,6 @@ export class DocumentRequestDto {
 
   @IsNotEmpty()
   @IsString()
-  method: string;
+  @IsOptional()
+  method?: string;
 }

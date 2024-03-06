@@ -13,6 +13,7 @@ export class Helper {
         method: request.method,
         url: `${process.env.OWNCLOUD_URL}/${request.key}`,
         data: request.Body && request.Body,
+        responseType: 'arraybuffer',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Basic ${Buffer.from(
@@ -21,7 +22,11 @@ export class Helper {
         },
       });
 
-      return { status: response.status, statusText: response.statusText };
+      return {
+        status: response.status,
+        statusText: response.statusText,
+        data: response.config.url,
+      };
     } catch (error) {
       if (error.response && error.response.status === 404) {
         return { status: 404, statusText: 'Not Found' };
