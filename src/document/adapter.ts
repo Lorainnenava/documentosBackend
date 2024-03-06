@@ -8,12 +8,12 @@ export const ownCloudAdapter = async (
   try {
     const response = await axios.request({
       method,
-      url: `http://localhost:8080/remote.php/dav/files/prueba/${key}`,
+      url: `http://localhost:8080/remote.php/dav/files/admin/${key}`,
       data: Body && Body,
       headers: {
         'Content-Type':
           method === 'MKCOL' ? 'application/json' : 'application/octet-stream',
-        Authorization: `Basic ${Buffer.from('prueba:prueba2024').toString('base64')}`,
+        Authorization: `Basic ${Buffer.from('admin:mely_0722').toString('base64')}`,
       },
     });
 

@@ -16,16 +16,16 @@ export class DocumentUploadService {
 
     let currentPath: string = '';
     try {
-      // Verifica si la carpeta exsite de lo contrario la crea
+      // Verifica si la carpeta existe de lo contrario la crea
       await this._carpetaAndSubCarpetaService.folderExist(path[0]);
 
-      // Verificar si la primera subcarpeta existe dentro de la carpeta raíz, de lo contrario, crearla
+      // Verificar si la primera subCarpeta existe dentro de la carpeta raíz, de lo contrario, crearla
       if (path.length > 1) {
         currentPath = `${path[0]}/${path[1]}/`;
         await this._carpetaAndSubCarpetaService.subFolderExist(currentPath);
       }
 
-      // Crear las subcarpetas una por una
+      // Crear las subCarpetas una por una
       for (let i = 2; i < path.length - 1; i++) {
         currentPath += `${path[i]}/`;
         await this._carpetaAndSubCarpetaService.subFolderExist(currentPath);
