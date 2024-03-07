@@ -9,7 +9,6 @@ import { DocumentEntity } from './domain/documents/entity/document.entity';
 import { DocumentUploadService } from './service/document/create/documentUpload.service';
 import { DocumentDeleteService } from './service/document/delete/documentDelete.service';
 import { DocumentGetFileService } from './service/document/getFile/documentGetFile.service';
-import { FolderAndSubFoldersService } from './service/document/folderAndSobFolder/folderAndSubFolder.service';
 
 @Module({
   imports: [
@@ -33,7 +32,6 @@ import { FolderAndSubFoldersService } from './service/document/folderAndSobFolde
   controllers: [DocumentController],
   providers: [
     Helper,
-    FolderAndSubFoldersService,
     DocumentRepository,
     DocumentUploadService,
     DocumentGetFileService,
@@ -43,6 +41,6 @@ import { FolderAndSubFoldersService } from './service/document/folderAndSobFolde
       useClass: ValidationPipe,
     },
   ],
-  exports: [Helper, FolderAndSubFoldersService, TypeOrmModule],
+  exports: [Helper, TypeOrmModule],
 })
 export class AppModule {}

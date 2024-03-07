@@ -4,6 +4,13 @@ import { DocumentResponseDto } from '../domain/documents/dto/response/documentRe
 
 @Injectable()
 export class Helper {
+  /**
+   * Adaptador para manejar las solicitudes de ownCloud.
+   * @param method - Método para realizar la solicitud.
+   * @param key - Ruta identificadora del archivo.
+   * @param body - Cuerpo del archivo.
+   * @returns DocumentResponseDto
+   */
   async ownCloudAdapter(
     method: string,
     key: string,
@@ -32,6 +39,28 @@ export class Helper {
       if (error.response && error.response.status === 404) {
         return { status: 404, statusText: 'Not Found' };
       }
+      throw error;
+    }
+  }
+
+  /**
+   * Verifica la existencia o crea una carpeta o una subcarpeta.
+   * @param name - Nombre para buscar o crear una carpeta o subcarpeta.
+   * @returns DocumentResponseDto
+   */
+  async folderOrSubFolderExist(name: string): Promise<DocumentResponseDto> {
+    try {
+      const searchFolderOrSubFolder = await this.ownCloudAdapter(
+        'GET',
+        `${name}`,
+      );
+
+      if (searchFolderOrSubFolder.status === 404) {
+        await this.ownCloudAdapter('MKCOL', `${name}/`);
+      }
+
+      return searchFolderOrSubFolder;
+    } catch (error) {
       throw error;
     }
   }

@@ -13,10 +13,23 @@ import { DocumentUploadService } from '../service/document/create/documentUpload
 import { DocumentDeleteService } from '../service/document/delete/documentDelete.service';
 import { DocumentResponseDto } from '../domain/documents/dto/response/documentResponse.dto';
 import { DocumentGetFileService } from '../service/document/getFile/documentGetFile.service';
+import { DocumentDeleteResponseDto } from '../domain/documents/dto/response/documentDeleteResponse.dto';
 
+/**
+ * @class
+ * @public
+ * @name DocumentController
+ * @description Esta clase es el controlador de la aplicación
+ */
 @ApiTags('Document')
 @Controller('document')
 export class DocumentController {
+  /**
+   * @constructor
+   * @param _documentUpload
+   * @param _documentGetFileService
+   * @param _documentDeleteService
+   */
   constructor(
     private readonly _documentUpload: DocumentUploadService,
     private readonly _documentGetFileService: DocumentGetFileService,
@@ -25,8 +38,8 @@ export class DocumentController {
 
   /**
    * Crear documento
-   * @param file
-   * @returns
+   * @param file - El objeto de solicitud del documento.
+   * @returns Una promesa que resuelve el objeto de respuesta del documento.
    */
   @Post('upload')
   @ApiConsumes('multipart/form-data')
@@ -50,13 +63,13 @@ export class DocumentController {
     file: any,
     @Body('key') key: string,
   ): Promise<string> {
-    return await this._documentUpload.upload(file?.buffer, key);
+    return await this._documentUpload.handle(file?.buffer, key);
   }
 
   /**
    * Obtener un documento
-   * @param request
-   * @returns
+   * @param request - El objeto de solicitud del documento.
+   * @returns Una promesa que resuelve el objeto de respuesta del documento.
    */
   @Post('getFile')
   async getFile(
@@ -67,13 +80,13 @@ export class DocumentController {
 
   /**
    * Eliminar un documento
-   * @param request
-   * @returns
+   * @param request - El objeto de solicitud del documento.
+   * @returns Una promesa que resuelve el objeto de respuesta del documento.
    */
   @Put('deleteFile')
   async deleteFile(
     @Body() request: DocumentRequestDto,
-  ): Promise<DocumentResponseDto> {
+  ): Promise<DocumentDeleteResponseDto> {
     return await this._documentDeleteService.deleteFile(request.key);
   }
 }

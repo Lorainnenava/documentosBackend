@@ -11,7 +11,7 @@ import { Repository, SaveOptions } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 /**
- * Repositorio de roles.
+ * Repositorio de documentos.
  */
 @Injectable()
 export class DocumentRepository implements DocumentRepositoryInterface {

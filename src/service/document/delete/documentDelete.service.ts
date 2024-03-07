@@ -1,11 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { DocumentRepository } from '../../../infrastructure/documentRepository';
+import { DocumentDeleteResponseDto } from '../../../domain/documents/dto/response/documentDeleteResponse.dto';
 
 @Injectable()
 export class DocumentDeleteService {
   constructor(private readonly _documentRepository: DocumentRepository) {}
 
-  async deleteFile(key: string): Promise<any> {
+  async deleteFile(key: string): Promise<DocumentDeleteResponseDto> {
     try {
       // Buscar un documento en la base de datos
       const searchDocument = await this._documentRepository.findOne({
