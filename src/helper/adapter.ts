@@ -1,18 +1,19 @@
 import axios from 'axios';
 import { Injectable } from '@nestjs/common';
-import { DocumentRequestDto } from '../interface/documentRequest.dto';
-import { DocumentResponseDto } from '../interface/documentResponse.dto';
+import { DocumentResponseDto } from '../domain/documents/dto/response/documentResponse.dto';
 
 @Injectable()
 export class Helper {
   async ownCloudAdapter(
-    request: DocumentRequestDto,
+    method: string,
+    key: string,
+    Body?: Buffer | ArrayBuffer,
   ): Promise<DocumentResponseDto> {
     try {
       const response = await axios.request({
-        method: request.method,
-        url: `${process.env.OWNCLOUD_URL}/${request.key}`,
-        data: request.Body && request.Body,
+        method: method,
+        url: `${process.env.OWNCLOUD_URL}/${key}`,
+        data: Body && Body,
         responseType: 'arraybuffer',
         headers: {
           'Content-Type': 'application/json',

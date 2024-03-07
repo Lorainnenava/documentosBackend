@@ -9,16 +9,13 @@ export class FolderAndSubFoldersService {
     name: string,
   ): Promise<{ status: number; statusText: string }> {
     try {
-      const obtainFolder = await this._hepler.ownCloudAdapter({
-        method: 'GET',
-        key: `${name}/`,
-      });
+      const obtainFolder = await this._hepler.ownCloudAdapter(
+        'GET',
+        `${name}/`,
+      );
 
       if (obtainFolder.status === 404) {
-        await this._hepler.ownCloudAdapter({
-          method: 'MKCOL',
-          key: `${name}/`,
-        });
+        await this._hepler.ownCloudAdapter('MKCOL', `${name}/`);
       }
 
       return obtainFolder;
@@ -31,16 +28,13 @@ export class FolderAndSubFoldersService {
     name: string,
   ): Promise<{ status: number; statusText: string }> {
     try {
-      const obtainSubFolder = await this._hepler.ownCloudAdapter({
-        method: 'GET',
-        key: `${name}`,
-      });
+      const obtainSubFolder = await this._hepler.ownCloudAdapter(
+        'GET',
+        `${name}`,
+      );
 
       if (obtainSubFolder.status === 404) {
-        await this._hepler.ownCloudAdapter({
-          method: 'MKCOL',
-          key: `${name}/`,
-        });
+        await this._hepler.ownCloudAdapter('MKCOL', `${name}/`);
       }
 
       return obtainSubFolder;

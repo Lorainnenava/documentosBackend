@@ -7,10 +7,7 @@ export class DocumentGetFileService {
 
   async getFile(key: string): Promise<any> {
     try {
-      const obtainFile = await this._helper.ownCloudAdapter({
-        method: 'GET',
-        key,
-      });
+      const obtainFile = await this._helper.ownCloudAdapter('GET', key);
 
       return obtainFile;
     } catch (error) {
