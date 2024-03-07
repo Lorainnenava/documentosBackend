@@ -6,6 +6,7 @@ import { FileController } from './controller/owncloud.controller';
 import { DocumentUploadService } from './service/document/create/documentUpload.service';
 import { DocumentGetFileService } from './service/document/getFile/documentGetFile.service';
 import { FolderAndSubFoldersService } from './service/document/folderAndSobFolder/folderAndSubFolder.service';
+import { DocumentUploadServiceMasive } from './service/document/bultCreate/documentUpload.service';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { FolderAndSubFoldersService } from './service/document/folderAndSobFolde
     FolderAndSubFoldersService,
     DocumentUploadService,
     DocumentGetFileService,
+    DocumentUploadServiceMasive,
     {
       provide: APP_PIPE,
       useClass: ValidationPipe,
