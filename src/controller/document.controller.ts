@@ -5,15 +5,17 @@ import {
   Controller,
   UploadedFile,
   UseInterceptors,
+  UploadedFiles,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { DocumentUpload } from '../service/document/create/documentUpload.service';
 import { DocumentDelete } from '../service/document/delete/documentDelete.service';
 import { DocumentGetFile } from '../service/document/getFile/documentGetFile.service';
 import { DocumentRequestDto } from '../domain/documents/dto/request/documentRequest.dto';
 import { DocumentResponseDto } from '../domain/documents/dto/response/documentResponse.dto';
 import { DocumentDeleteResponseDto } from '../domain/documents/dto/response/documentDeleteResponse.dto';
+import { DocumentUploadServiceMassive } from '../service/document/bulkCreate/documentBulkCreate.service';
 
 /**
  * @class
@@ -34,6 +36,7 @@ export class DocumentController {
     private readonly _documentUpload: DocumentUpload,
     private readonly _documentGetFile: DocumentGetFile,
     private readonly _documentDelete: DocumentDelete,
+    private readonly _documentBulkCreate: DocumentUploadServiceMassive,
   ) {}
 
   /**
@@ -88,5 +91,45 @@ export class DocumentController {
     @Body() request: DocumentRequestDto,
   ): Promise<DocumentDeleteResponseDto> {
     return await this._documentDelete.handle(request.key);
+  }
+
+  /**
+   * Upload multiple files using mass upload service
+   * @param files
+   * @param keys
+   * @returns
+   */
+  @Post('massive')
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        files: {
+          type: 'array',
+          items: {
+            type: 'string',
+            format: 'binary',
+          },
+        },
+        key: {
+          type: 'string',
+        },
+      },
+    },
+  })
+  @UseInterceptors(FilesInterceptor('files'))
+  async uploadFiles(
+    @UploadedFiles() files: any[],
+    @Body('key') key: string,
+  ): Promise<string[]> {
+    const fileObjects = files.map((file) => ({
+      buffer: file.buffer,
+      originalname: file.originalname,
+    }));
+    return await this._documentBulkCreate.upload({
+      body: fileObjects,
+      key,
+    });
   }
 }

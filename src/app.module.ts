@@ -9,6 +9,7 @@ import { DocumentEntity } from './domain/documents/entity/document.entity';
 import { DocumentUpload } from './service/document/create/documentUpload.service';
 import { DocumentDelete } from './service/document/delete/documentDelete.service';
 import { DocumentGetFile } from './service/document/getFile/documentGetFile.service';
+import { DocumentUploadServiceMassive } from './service/document/bulkCreate/documentBulkCreate.service';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { DocumentGetFile } from './service/document/getFile/documentGetFile.serv
     DocumentUpload,
     DocumentGetFile,
     DocumentDelete,
+    DocumentUploadServiceMassive,
     {
       provide: APP_PIPE,
       useClass: ValidationPipe,
