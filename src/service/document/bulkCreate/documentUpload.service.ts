@@ -3,7 +3,7 @@ import { Helper } from '../../../helper/adapter';
 import { FolderAndSubFoldersService } from '../folderAndSobFolder/folderAndSubFolder.service';
 
 @Injectable()
-export class DocumentUploadServiceMasive {
+export class DocumentUploadServiceMassive {
   constructor(
     private _folderAndSubFoldersService: FolderAndSubFoldersService,
     private readonly _helper: Helper,

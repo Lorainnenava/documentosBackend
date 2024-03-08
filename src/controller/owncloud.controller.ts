@@ -12,7 +12,7 @@ import { DocumentRequestDto } from '../interface/documentRequest.dto';
 import { DocumentResponseDto } from '../interface/documentResponse.dto';
 import { DocumentUploadService } from '../service/document/create/documentUpload.service';
 import { DocumentGetFileService } from '../service/document/getFile/documentGetFile.service';
-import { DocumentUploadServiceMasive } from 'src/service/document/bultCreate/documentUpload.service';
+import { DocumentUploadServiceMassive } from 'src/service/document/bulkCreate/documentUpload.service';
 
 @ApiTags('files')
 @Controller()
@@ -20,7 +20,7 @@ export class FileController {
   constructor(
     private readonly _documentUpload: DocumentUploadService,
     private readonly _documentGetFileService: DocumentGetFileService,
-    private readonly _documentGetFileServiceMasive: DocumentUploadServiceMasive,
+    private readonly _documentGetFileServiceMassive: DocumentUploadServiceMassive,
   ) {}
 
   /**
@@ -66,7 +66,7 @@ export class FileController {
    * @param keys
    * @returns
    */
-  @Post('masive')
+  @Post('massive')
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
@@ -94,7 +94,7 @@ export class FileController {
       buffer: file.buffer,
       originalname: file.originalname,
     }));
-    return await this._documentGetFileServiceMasive.upload({
+    return await this._documentGetFileServiceMassive.upload({
       body: fileObjects,
       key,
     });
