@@ -4,14 +4,14 @@ import { DocumentRepository } from '../../../infrastructure/documentRepository';
 import { DocumentUploadInterface } from '../../../domain/interface/documentUploadInterface';
 
 /**
- * @export DocumentUploadService
- * @class UploadDocument
+ * @export DocumentUpload
+ * @class DocumentUpload
  * @implements {DocumentUploadInterface}
  */
 @Injectable()
-export class DocumentUploadService implements DocumentUploadInterface {
+export class DocumentUpload implements DocumentUploadInterface {
   /**
-   *
+   * Inicializa una nueva instancia de la clase.
    * @param _helper
    * @param _documentRepository
    */
@@ -22,8 +22,7 @@ export class DocumentUploadService implements DocumentUploadInterface {
 
   /**
    * @return {string}
-   * @method handle
-   * @description Este metodo retorna string.
+   * @method handle -- Maneja la creación de documentos.
    */
   async handle(Body: Buffer | ArrayBuffer, key: string): Promise<string> {
     try {

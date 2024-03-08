@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 /**
- * Respuesta del eliminado de documento
+ * Representa los datos de respuesta del documento eliminado.
  */
 export class DocumentDeleteResponseDto {
   /**

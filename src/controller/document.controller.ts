@@ -8,11 +8,11 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { DocumentUpload } from '../service/document/create/documentUpload.service';
+import { DocumentDelete } from '../service/document/delete/documentDelete.service';
+import { DocumentGetFile } from '../service/document/getFile/documentGetFile.service';
 import { DocumentRequestDto } from '../domain/documents/dto/request/documentRequest.dto';
-import { DocumentUploadService } from '../service/document/create/documentUpload.service';
-import { DocumentDeleteService } from '../service/document/delete/documentDelete.service';
 import { DocumentResponseDto } from '../domain/documents/dto/response/documentResponse.dto';
-import { DocumentGetFileService } from '../service/document/getFile/documentGetFile.service';
 import { DocumentDeleteResponseDto } from '../domain/documents/dto/response/documentDeleteResponse.dto';
 
 /**
@@ -31,9 +31,9 @@ export class DocumentController {
    * @param _documentDeleteService
    */
   constructor(
-    private readonly _documentUpload: DocumentUploadService,
-    private readonly _documentGetFileService: DocumentGetFileService,
-    private readonly _documentDeleteService: DocumentDeleteService,
+    private readonly _documentUpload: DocumentUpload,
+    private readonly _documentGetFile: DocumentGetFile,
+    private readonly _documentDelete: DocumentDelete,
   ) {}
 
   /**
@@ -75,7 +75,7 @@ export class DocumentController {
   async getFile(
     @Body() request: DocumentRequestDto,
   ): Promise<DocumentResponseDto> {
-    return await this._documentGetFileService.getFile(request.key);
+    return await this._documentGetFile.handle(request.key);
   }
 
   /**
@@ -87,6 +87,6 @@ export class DocumentController {
   async deleteFile(
     @Body() request: DocumentRequestDto,
   ): Promise<DocumentDeleteResponseDto> {
-    return await this._documentDeleteService.deleteFile(request.key);
+    return await this._documentDelete.handle(request.key);
   }
 }

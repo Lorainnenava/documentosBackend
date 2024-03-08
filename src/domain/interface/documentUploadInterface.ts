@@ -3,7 +3,7 @@
  */
 export interface DocumentUploadInterface {
   /**
-   * Maneja la solicitud para crear un solo documento.
+   * Maneja la solicitud para crear un documento.
    * @param request Los datos de la solicitud.
    * @returns {Promise<string>} Una promesa que resuelve los datos de la respuesta.
    */

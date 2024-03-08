@@ -8,7 +8,7 @@ import {
 import { DocumentEntity } from '../documents/entity/document.entity';
 
 /**
- * Representa la interfaz para un repositorio de roles.
+ * Representa la interfaz para un repositorio de documentos.
  * @template Document El tipo de entidad.
  */
 export interface DocumentRepositoryInterface {

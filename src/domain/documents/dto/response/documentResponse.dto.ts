@@ -1,5 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+/**
+ * Representa los datos de respuesta del documento.
+ */
 export class DocumentResponseDto {
   /**
    * El estado de la solicitud del documento.

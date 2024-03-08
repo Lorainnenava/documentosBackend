@@ -6,9 +6,9 @@ import { Module, ValidationPipe } from '@nestjs/common';
 import { DocumentController } from './controller/document.controller';
 import { DocumentRepository } from './infrastructure/documentRepository';
 import { DocumentEntity } from './domain/documents/entity/document.entity';
-import { DocumentUploadService } from './service/document/create/documentUpload.service';
-import { DocumentDeleteService } from './service/document/delete/documentDelete.service';
-import { DocumentGetFileService } from './service/document/getFile/documentGetFile.service';
+import { DocumentUpload } from './service/document/create/documentUpload.service';
+import { DocumentDelete } from './service/document/delete/documentDelete.service';
+import { DocumentGetFile } from './service/document/getFile/documentGetFile.service';
 
 @Module({
   imports: [
@@ -33,9 +33,9 @@ import { DocumentGetFileService } from './service/document/getFile/documentGetFi
   providers: [
     Helper,
     DocumentRepository,
-    DocumentUploadService,
-    DocumentGetFileService,
-    DocumentDeleteService,
+    DocumentUpload,
+    DocumentGetFile,
+    DocumentDelete,
     {
       provide: APP_PIPE,
       useClass: ValidationPipe,
