@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const DocumentGetFile = createAsyncThunk(
-  "/document/getFile",
+export const documentDelete = createAsyncThunk(
+  "/document/deleteFile",
   async (key: string) => {
     try {
-      // Realizar la solicitud GET utilizando Axios
+      // Realizar la solicitud POST utilizando Axios
       const response = await axios.post(
-        `http://localhost:5000/document/getFile`,
-        { key },
+        `${process.env.OWNCLOUD_URL}/document/deleteFile`,
+        key,
         {
           headers: {
             "Content-type": "application/json",

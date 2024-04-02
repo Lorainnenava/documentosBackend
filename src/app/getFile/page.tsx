@@ -11,7 +11,7 @@ const Index = () => {
     useEffect(() => {
         dispatch(
             DocumentGetFile(
-                "Documentos/solicitud/23/primeraEtapa/ffbd5b5a-f473-455e-87dc-40b0572b1a9c-cover.png"
+                "Documentos/solicitud/23/primeraEtapa/0ab2c2ebec0266cb7423e4dd679efa18.jpg"
             )
         );
     }, [dispatch]);
