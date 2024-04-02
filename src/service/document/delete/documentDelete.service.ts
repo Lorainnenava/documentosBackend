@@ -26,13 +26,16 @@ export class DocumentDelete implements DocumentDeleteInterface {
       const searchDocument = await this._documentRepository.findOne({
         where: { key: key, state: 1 },
       });
+
+      console.log(searchDocument, '🍟🍟🍟');
+
       if (!searchDocument.id) {
         throw new NotFoundException();
       }
 
       const updateFile = await this._documentRepository.update(
         searchDocument.id,
-        { ...searchDocument, state: 2 },
+        { ...searchDocument, state: 0 },
       );
 
       return updateFile;

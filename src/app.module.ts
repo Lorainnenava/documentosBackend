@@ -10,6 +10,7 @@ import { DocumentUpload } from './service/document/create/documentUpload.service
 import { DocumentDelete } from './service/document/delete/documentDelete.service';
 import { DocumentGetFile } from './service/document/getFile/documentGetFile.service';
 import { DocumentUploadServiceMassive } from './service/document/bulkCreate/documentBulkCreate.service';
+import { DocumentGetAll } from './service/document/getAll/documentGetAll.service';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { DocumentUploadServiceMassive } from './service/document/bulkCreate/docu
     DocumentRepository,
     DocumentUpload,
     DocumentGetFile,
+    DocumentGetAll,
     DocumentDelete,
     DocumentUploadServiceMassive,
     {

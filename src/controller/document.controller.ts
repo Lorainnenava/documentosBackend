@@ -6,6 +6,7 @@ import {
   UploadedFile,
   UseInterceptors,
   UploadedFiles,
+  Get,
 } from '@nestjs/common';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
@@ -16,6 +17,7 @@ import { DocumentRequestDto } from '../domain/documents/dto/request/documentRequ
 import { DocumentResponseDto } from '../domain/documents/dto/response/documentResponse.dto';
 import { DocumentDeleteResponseDto } from '../domain/documents/dto/response/documentDeleteResponse.dto';
 import { DocumentUploadServiceMassive } from '../service/document/bulkCreate/documentBulkCreate.service';
+import { DocumentGetAll } from 'src/service/document/getAll/documentGetAll.service';
 
 /**
  * @class
@@ -35,6 +37,7 @@ export class DocumentController {
   constructor(
     private readonly _documentUpload: DocumentUpload,
     private readonly _documentGetFile: DocumentGetFile,
+    private readonly _documentGetAll: DocumentGetAll,
     private readonly _documentDelete: DocumentDelete,
     private readonly _documentBulkCreate: DocumentUploadServiceMassive,
   ) {}
@@ -79,6 +82,16 @@ export class DocumentController {
     @Body() request: DocumentRequestDto,
   ): Promise<DocumentResponseDto> {
     return await this._documentGetFile.handle(request.key);
+  }
+
+  /**
+   * Obtener un documento
+   * @param request - El objeto de solicitud del documento.
+   * @returns Una promesa que resuelve el objeto de respuesta del documento.
+   */
+  @Get('getAllDocuments')
+  async getAllDocuments(): Promise<DocumentResponseDto[]> {
+    return await this._documentGetAll.getAll();
   }
 
   /**
